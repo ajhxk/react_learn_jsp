@@ -1,6 +1,10 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
+import axios from 'axios'
 import XiaojiejieItem from './XiaojiejieItem'
+import Boss from './Boss'
+import Boss2 from './Boss2'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 class Xiaojiejie extends Component {
 
@@ -8,10 +12,7 @@ class Xiaojiejie extends Component {
         super(props)
         this.state = {
             inputValue: '',
-            list: [
-                'AA',
-                'BB'
-            ]
+            list: ['AA','BB']
         }
         this.handleInputCHange = this.handleInputCHange.bind(this)
         this.handleAddList = this.handleAddList.bind(this)
@@ -23,32 +24,62 @@ class Xiaojiejie extends Component {
             <Fragment>
                 <div>
                     <label htmlFor="jspang">加入服务:</label>
-                    <input id="jspang" value={this.state.inputValue} onChange={this.handleInputCHange} />
+                    <input 
+                        id="jspang" 
+                        ref={ref => {this.input = ref}}
+                        value={this.state.inputValue} 
+                        onChange={this.handleInputCHange} />
                     <button onClick={this.handleAddList}>增加服务</button>
                 </div>
-                <ul>
-                    {
-                        this.state.list.map((item, index) => {
-                            return (
-                                <XiaojiejieItem
-                                    content={item}
-                                    handleDeleteItemProp={this.handleDeleteItem}
-                                    key={index + item}
-                                    index={index}
-                                    aname='aa'
-                                />
-
-                            )
-                        })
-                    }
+                <ul ref={ref => {this.ul = ref}}>
+                    <TransitionGroup>
+                        {
+                            this.state.list.map((item, index) => {
+                                return (
+                                    <CSSTransition
+                                        timeout={2000}
+                                        classNames={"boss-text"}
+                                        unmountOnExit
+                                        appear={true}
+                                        key={index+item}
+                                    >
+                                        <XiaojiejieItem
+                                            content={item}
+                                            handleDeleteItemProp={this.handleDeleteItem}
+                                            key={index + item}
+                                            index={index}               
+                                        />
+                                    </CSSTransition>
+                                )
+                            })
+                        }
+                    </TransitionGroup>
                 </ul>
+                <Boss/>
+                <Boss2/>
             </Fragment>
         )
     }
 
-    handleInputCHange(e) {
+    componentDidMount(){
+        // axios.get('https://easy-mock.com/mock/5e37b94436670a4159e47419/reactDemo01/xiaojiejie')
+        //     .then((res)=>{
+        //         console.log('axios 获取数据成功:'+JSON.stringify(res))  
+        //         this.setState({
+        //             list: res.data.data
+        //         })
+        //     })
+        //     .catch((error)=>{
+        //         console.log('axios 获取数据失败'+error)
+        //         this.setState({
+        //             list: ['AA-err', 'BB-err']
+        //         })
+        //     })
+    }
+
+    handleInputCHange() {
         this.setState({
-            inputValue: e.target.value
+            inputValue: this.input.value
         })
     }
 
@@ -56,7 +87,8 @@ class Xiaojiejie extends Component {
         this.setState({
             list: [...this.state.list, this.state.inputValue],
             inputValue: ''
-        })
+        }, () => console.log(this.ul.querySelectorAll('div').length));
+        // console.log(this.ul.querySelectorAll('div').length)
     }
 
     handleDeleteItem(index) {
@@ -75,6 +107,8 @@ XiaojiejieItem.propTypes = {
     aname: PropTypes.string.isRequired
 }
 
-// XiaojiejieItem.de
+XiaojiejieItem.defaultProps = {
+    aname: 'qwer'
+}
 
 export default Xiaojiejie

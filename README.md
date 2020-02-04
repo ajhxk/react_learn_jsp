@@ -66,3 +66,13 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+### easy-mock
+https://easy-mock.com/project/5e37b94436670a4159e47419
+ajhxk / Qwer12345
+
+### 动画库
+- Transition
+- CSSTransition
+- TransitionGroup
