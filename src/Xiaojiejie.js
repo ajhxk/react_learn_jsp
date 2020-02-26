@@ -12,7 +12,8 @@ class Xiaojiejie extends Component {
         super(props)
         this.state = {
             inputValue: '',
-            list: ['AA','BB']
+            // list: ['AA','BB']
+            list: [],
         }
         this.handleInputCHange = this.handleInputCHange.bind(this)
         this.handleAddList = this.handleAddList.bind(this)
@@ -62,19 +63,19 @@ class Xiaojiejie extends Component {
     }
 
     componentDidMount(){
-        // axios.get('https://easy-mock.com/mock/5e37b94436670a4159e47419/reactDemo01/xiaojiejie')
-        //     .then((res)=>{
-        //         console.log('axios 获取数据成功:'+JSON.stringify(res))  
-        //         this.setState({
-        //             list: res.data.data
-        //         })
-        //     })
-        //     .catch((error)=>{
-        //         console.log('axios 获取数据失败'+error)
-        //         this.setState({
-        //             list: ['AA-err', 'BB-err']
-        //         })
-        //     })
+        axios.get('https://www.studyinghome.com/mock/5e55bf642cb0d073b813a475/XJJ/xiaojiejie')
+            .then((res)=>{
+                console.log('axios 获取数据成功:'+JSON.stringify(res))  
+                this.setState({
+                    list: res.data.data
+                })
+            })
+            .catch((error)=>{
+                console.log('axios 获取数据失败'+error)
+                this.setState({
+                    list: ['AA-err', 'BB-err']
+                })
+            })
     }
 
     handleInputCHange() {

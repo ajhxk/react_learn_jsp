@@ -69,7 +69,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 
 ### easy-mock
-https://easy-mock.com/project/5e37b94436670a4159e47419
+https://www.studyinghome.com/project/5e55bf642cb0d073b813a475
 ajhxk / Qwer12345
 
 ### 动画库
